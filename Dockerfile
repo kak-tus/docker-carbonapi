@@ -18,7 +18,11 @@ FROM alpine:3.8
 
 COPY --from=build /go/src/github.com/go-graphite/carbonapi/carbonapi /usr/local/bin/carbonapi
 
-RUN adduser -DH user
+RUN \
+  adduser -DH user \
+  \
+  && apk add --no-cache \
+    cairo
 
 USER user
 
