@@ -17,6 +17,7 @@ RUN \
 FROM alpine:3.8
 
 COPY --from=build /go/src/github.com/go-graphite/carbonapi/carbonapi /usr/local/bin/carbonapi
+COPY carbonapi.yml /etc/carbonapi.yml
 
 RUN \
   adduser -DH user \
@@ -28,4 +29,4 @@ USER user
 
 EXPOSE 8081
 
-CMD ["/usr/local/bin/carbonapi"]
+CMD ["/usr/local/bin/carbonapi", "-config", "/etc/carbonapi.yml", "-envprefix", "CARBONAPI"]
